@@ -1,5 +1,6 @@
 #!/sbin/openrc-run
 #
+# oauth2_proxy
 OAUTH2_PROXY_DIR="/etc/${SVCNAME}"
 OAUTH2_PROXY_CONFFILE="${OAUTH2_PROXY_DIR}/oauth2_proxy.cfg"
 OAUTH2_PROXY_BIN="/usr/bin/oauth2_proxy"
