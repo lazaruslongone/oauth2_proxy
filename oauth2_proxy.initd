@@ -1,0 +1,34 @@
+#!/sbin/openrc-run
+#
+OAUTH2_PROXY_DIR="/etc/${SVCNAME}"
+OAUTH2_PROXY_CONFFILE="${OAUTH2_PROXY_DIR}/oauth2_proxy.cfg"
+OAUTH2_PROXY_BIN="/usr/bin/oauth2_proxy"
+OAUTH2_PROXY_PID="/var/run/${SVCNAME}.pid"
+
+depend() {
+  use logger dns
+  need net sshd
+  after firewall
+}
+
+eckconfig() {
+  if [ ! -f "${OAUTH2_PROXY_CONFFILE}" ]; then
+    eerror "Configuration file ${OAUTH2_PROXY_CONFFILE} not found!"
+    return 1
+  fi
+}
+
+start() {
+  ebegin "Starting ${SVCNAME}"
+  start-stop-daemon --background --start \
+  --exec ${OAUTH2_PROXY_BIN} -config ${OAUTH2_PROXY_CONFFILE} \
+  --make-pidfile --pidfile ${OAUTH2_PROXY_PID}
+  eend $?
+}
+
+stop() {
+  ebegin "Stopping ${SVCNAME}"
+  start-stop-daemon --stop --exec ${OAUTH2_PROXY_BIN} \
+  --pidfile ${OAUTH2_PROXY_PID}
+  eend $?
+}
