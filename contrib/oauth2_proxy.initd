@@ -1,4 +1,5 @@
-#!/sbin/openrc-run
+#!/sbin/runscript 
+# ff !/sbin/openrc-run
 # Copyright 1999-2004 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # soxy as a service
@@ -26,12 +27,11 @@ start() {
   start-stop-daemon --background --start \
   --exec ${OAUTH2_PROXY_BIN} -config ${OAUTH2_PROXY_CONFFILE} \
   --make-pidfile --pidfile ${OAUTH2_PROXY_PID}
-
   eend $?
 }
 
 stop() {
-  ebegin "Stopping myApp"
+  ebegin "Stopping ${SVCNAME}"
   start-stop-daemon --stop --exec ${OAUTH2_PROXY_BIN} \
   --pidfile ${OAUTH2_PROXY_PID}
   eend $?
