@@ -1,9 +1,5 @@
-#!/sbin/runscript 
-# ff !/sbin/openrc-run
-# Copyright 1999-2004 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# soxy as a service
-
+#!/sbin/openrc-run
+#
 OAUTH2_PROXY_DIR="/etc/${SVCNAME}"
 OAUTH2_PROXY_CONFFILE="${OAUTH2_PROXY_DIR}/oauth2_proxy.cfg"
 OAUTH2_PROXY_BIN="/usr/bin/oauth2_proxy"
